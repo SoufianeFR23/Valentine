@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>For Mariem ❤️</title>
+  <title>First Valentine ❤️</title>
   <style>
     body {
       margin: 0;
@@ -10,7 +10,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #ff4e8a, #ff9a9e);
+      background: linear-gradient(135deg, #ff9a9e, #ffc3a0);
       font-family: Arial, sans-serif;
       text-align: center;
       color: white;
@@ -18,16 +18,21 @@
     }
 
     .container {
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.25);
       padding: 50px;
       border-radius: 20px;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(8px);
       max-width: 500px;
       position: relative;
     }
 
     h1 {
       font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 1.2rem;
       margin-bottom: 20px;
     }
 
@@ -45,6 +50,7 @@
       cursor: pointer;
       margin: 10px;
       transition: 0.3s;
+      position: relative;
     }
 
     #yesBtn {
@@ -63,13 +69,28 @@
       margin-top: 25px;
       font-size: 1.3rem;
       display: none;
+      white-space: pre-line;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      animation: floatUp 4s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh); opacity: 1; }
+      100% { transform: translateY(-10vh); opacity: 0; }
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <h1>Will you be my Valentine? ❤️</h1>
+    <h1>Mariem ❤️</h1>
+    <p>Our first Valentine.</p>
+    <p>I made this so you can open it quietly, keep it, and remember this moment.</p>
 
     <div class="buttons">
       <button id="yesBtn">Yes 💕</button>
@@ -84,47 +105,34 @@
     const noBtn = document.getElementById("noBtn");
     const message = document.getElementById("message");
 
-    let noCount = 0;
-
-    noBtn.addEventListener("click", () => {
-      noCount++;
-
-      if (noCount === 1) {
-        message.style.display = "block";
-        message.innerText = "Nice try... but that's not really an option 😌";
-      } else if (noCount === 2) {
-        message.innerText = "You clicked the wrong button again 👀";
-      } else {
-        message.innerText = "Okay stop playing. Press YES 💕";
-      }
-
-      // Move the No button randomly
+    // Make No impossible
+    noBtn.addEventListener("mouseover", () => {
       const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
       const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
-
-      // Make Yes button bigger every time
-      let currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
-      yesBtn.style.fontSize = (currentSize + 4) + "px";
     });
 
     yesBtn.addEventListener("click", () => {
       message.style.display = "block";
-      message.innerText = "I knew you'd make the right choice ❤️";
+      message.innerText = 
+`Thank you for saying Yes ❤️
+
+I made this page so you can see it quietly, without feeling shy.  
+It’s a memory you can keep forever.  
+And it’s a way for me to show you a little of what I can do with coding.`;
       noBtn.style.display = "none";
       yesBtn.style.display = "none";
       createHearts();
     });
 
     function createHearts() {
-      for (let i = 0; i < 25; i++) {
+      for (let i = 0; i < 50; i++) {
         const heart = document.createElement("div");
         heart.innerHTML = "❤️";
-        heart.style.position = "absolute";
+        heart.classList.add("heart");
         heart.style.left = Math.random() * 100 + "vw";
-        heart.style.top = Math.random() * 100 + "vh";
-        heart.style.fontSize = "20px";
+        heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
         document.body.appendChild(heart);
       }
     }
@@ -132,3 +140,4 @@
 
 </body>
 </html>
+
